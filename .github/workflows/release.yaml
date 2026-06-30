@@ -1,0 +1,29 @@
+name: Publish to LuaRocks
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y lua5.4 liblua5.4-dev luarocks zip gcc make
+
+      - name: Verify Lua
+        run: |
+          lua -v
+          luarocks --version
+
+      - name: Upload to LuaRocks
+        run: |
+          luarocks upload rockspec/quadratic-1.0-1.rockspec \
+            --api-key=${{ secrets.lua_quadratic }}
