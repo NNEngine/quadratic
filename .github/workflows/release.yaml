@@ -17,6 +17,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y lua5.4 liblua5.4-dev luarocks zip gcc make
+          luarocks install dkjson
 
       - name: Verify Lua
         run: |
