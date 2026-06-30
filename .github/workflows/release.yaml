@@ -17,7 +17,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y lua5.4 liblua5.4-dev luarocks zip gcc make
-          luarocks install dkjson
+          sudo luarocks --lua-version=5.4 install dkjson
 
       - name: Verify Lua
         run: |
@@ -26,5 +26,5 @@ jobs:
 
       - name: Upload to LuaRocks
         run: |
-          luarocks upload rockspec/quadratic-1.0-1.rockspec \
+          luarocks --lua-version=5.4 upload rockspec/quadratic-1.0-1.rockspec \
             --api-key=${{ secrets.lua_quadratic }}
